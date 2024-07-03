@@ -2,21 +2,34 @@ package com.maksimenko.Clicker.service;
 
 import com.maksimenko.Clicker.api.TwelveDataAPI;
 import com.maksimenko.Clicker.model.Stock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StockServiceImpl implements StockService {
+    private final TwelveDataAPI api;
 
+    @Autowired
+    public StockServiceImpl(TwelveDataAPI api) {
+        this.api = api;
+    }
     @Override
     public List<Stock> readAll() {
-        System.out.println("123123123");
-        TwelveDataAPI api = new TwelveDataAPI();
-        System.out.println(api.getAllPrices(TwelveDataAPI.dataStocks));
-        return new ArrayList<>(api.getAllPrices(TwelveDataAPI.dataStocks));
+        TwelveDataAPI.dataStocks = api.getAllPrices();
+        TwelveDataAPI.dataStocks = updateStocksCost(TwelveDataAPI.dataStocks);
+        return new ArrayList<>(TwelveDataAPI.dataStocks);
+    }
+
+    private List<Stock> updateStocksCost(List<Stock> stocks) {
+        return stocks.stream()
+                .peek(stock -> stock.setCost(stock.getStockCostGenerator()
+                        .generateCost(stock.getActualStockCost())))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -28,6 +41,12 @@ public class StockServiceImpl implements StockService {
         }
         Stock stockFromData = optionalStock.get();
         if (stock.getQuantity() != null) {
+            if (stockFromData.getQuantity() > stock.getQuantity()) {
+                TwelveDataAPI.amount = TwelveDataAPI.amount + stockFromData.getCost();
+            } else if (stockFromData.getQuantity() < stock.getQuantity()){
+                TwelveDataAPI.amount = TwelveDataAPI.amount - stockFromData.getCost();
+            }
+
             stockFromData.setQuantity(stock.getQuantity());
         }
         return stockFromData;

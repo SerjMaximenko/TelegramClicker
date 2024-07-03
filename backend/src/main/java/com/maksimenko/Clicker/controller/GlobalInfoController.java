@@ -28,9 +28,9 @@ public class GlobalInfoController {
         return new ResponseEntity<>(globalInfoService.getAmount(), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/global")
-    public ResponseEntity<Stock> update(@RequestBody Stock stock) throws Exception {
-        System.out.println("updateGlobal");
-        return new ResponseEntity<>(globalInfoService.updateById(id, stock), HttpStatus.OK);
-    }
+//    @PutMapping(value = "/global")
+//    public ResponseEntity<Stock> update(@RequestBody Stock stock) throws Exception {
+//        System.out.println("updateGlobal");
+//        return new ResponseEntity<>(globalInfoService.updateById(id, stock), HttpStatus.OK);
+//    }
 }

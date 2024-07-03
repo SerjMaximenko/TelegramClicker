@@ -8,7 +8,7 @@ function App() {
     return (
         <body>
             <main>
-                <ClickableArea></ClickableArea>
+                <ClickableArea/>
                 <ScrollingPanel/>
                 <div className="bottom-panel"></div>
             </main>

@@ -1,11 +1,16 @@
 package com.maksimenko.Clicker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Stock {
     private String symbol;
     private Double cost;
+    private Double actualStockCost;
     private Double costChange;
     private Double dividends;
     private Integer quantity;
+
+    private StockCostGenerator stockCostGenerator;
 
     public Stock() {
     }
@@ -16,6 +21,15 @@ public class Stock {
         this.costChange = costChange;
         this.dividends = dividends;
         this.quantity = quantity;
+        stockCostGenerator = new StockCostGenerator();
+    }
+
+    public Double getActualStockCost() {
+        return actualStockCost;
+    }
+
+    public void setActualStockCost(Double actualStockCost) {
+        this.actualStockCost = actualStockCost;
     }
 
     public Integer getQuantity() {
@@ -56,6 +70,11 @@ public class Stock {
 
     public void setCost(Double cost) {
         this.cost = cost;
+    }
+
+    @JsonIgnore
+    public StockCostGenerator getStockCostGenerator() {
+        return stockCostGenerator;
     }
 
     @Override

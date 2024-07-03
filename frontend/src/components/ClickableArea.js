@@ -5,7 +5,6 @@ function ClickableArea() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        console.log("click");
         const interval = setInterval(()=>{
             axios.get('http://localhost:8080/global').then(response => {
                 // console.log(response.data);
