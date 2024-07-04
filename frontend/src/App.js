@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import ClientForm from './ClientForm';
-import ClientList from './ClientList';
+import React from 'react';
 import ClickableArea from "./components/ClickableArea";
 import ScrollingPanel from "./components/ScrollingPanel";
 
