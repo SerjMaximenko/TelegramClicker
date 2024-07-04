@@ -25,7 +25,6 @@ public class StockController {
     @GetMapping(value = "/stocks")
     public ResponseEntity<List<Stock>> read() {
         final List<Stock> clients = stockService.readAll();
-
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 

@@ -10,6 +10,10 @@ public class Stock {
     private Double dividends;
     private Integer quantity;
 
+    @JsonIgnore
+    private Double averageBuyStock = 0d;
+
+    @JsonIgnore
     private StockCostGenerator stockCostGenerator;
 
     public Stock() {
@@ -56,6 +60,18 @@ public class Stock {
         this.costChange = costChange;
     }
 
+    public Double getAverageBuyStock() {
+        return averageBuyStock;
+    }
+
+    public void setAverageBuyStock(Double averageBuyStock) {
+        this.averageBuyStock = averageBuyStock;
+    }
+
+    public void setStockCostGenerator(StockCostGenerator stockCostGenerator) {
+        this.stockCostGenerator = stockCostGenerator;
+    }
+
     public String getSymbol() {
         return symbol;
     }
@@ -72,7 +88,6 @@ public class Stock {
         this.cost = cost;
     }
 
-    @JsonIgnore
     public StockCostGenerator getStockCostGenerator() {
         return stockCostGenerator;
     }
