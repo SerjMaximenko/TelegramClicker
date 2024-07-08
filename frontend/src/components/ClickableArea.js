@@ -1,20 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React, {useState} from 'react';
 
-function ClickableArea() {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const interval = setInterval(()=>{
-            axios.get('http://localhost:8080/global').then(response => {
-                // console.log(response.data);
-                setData(response.data);
-            });
-        },1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
+function ClickableArea({ data }) {
     return (
         <div className='clickable-area'>
             <div className='money-container'>,
