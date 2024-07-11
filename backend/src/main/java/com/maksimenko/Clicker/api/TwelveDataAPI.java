@@ -23,7 +23,7 @@ public class TwelveDataAPI {
     //TODO перенести в базу
     public static List<Stock> dataStocks = new ArrayList<>();
 
-    public static Double amount = 0d;
+    public static Double amount = 1000d;
 
     static {
         for (int i = 0; i < symbols.size(); i++) {
